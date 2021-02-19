@@ -10,7 +10,7 @@ public class User {
 
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Long Id;
 
     @Column(name ="firstname")
     private String Firstname;
@@ -18,7 +18,8 @@ public class User {
     @Column(name = "lastname")
     private String Lastname;
 
-    @Column(name = "email")
+
+    @Column(name = "email", unique = true)
     private String Email;
 
     @Column(name = "password")
@@ -48,6 +49,11 @@ public class User {
 
     }
 
+    public User(String email, String password) {
+        Email = email;
+        Password = password;
+    }
+
     public User(String firstname, String lastname, String email, String password, Date birthdate, String phone, String role, String picture, String token) {
         Firstname = firstname;
         Lastname = lastname;
@@ -73,7 +79,7 @@ public class User {
         this.company = company;
     }
 
-    public User(int id, String firstname, String lastname, String email, String password, Date birthdate, String phone, String role, String picture, String token, Company company) {
+    public User(Long id, String firstname, String lastname, String email, String password, Date birthdate, String phone, String role, String picture, String token, Company company) {
         Id = id;
         Firstname = firstname;
         Lastname = lastname;
@@ -87,11 +93,19 @@ public class User {
         this.company = company;
     }
 
-    public int getId() {
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Long getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         Id = id;
     }
 

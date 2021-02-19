@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Date;
 
@@ -22,6 +26,9 @@ public class CrmbackendApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        userRepository.save(new User("2i com","agence 2i com","digitalmark18@gmail.com","123456",new Date(),"20123456","admin","picture.png","token"));
+       // userRepository.save(new User("2i com","agence 2i com","digitalmark18@gmail.com","123456",new Date(),"20123456","admin","picture.png","token"));
     }
+
+
+
 }

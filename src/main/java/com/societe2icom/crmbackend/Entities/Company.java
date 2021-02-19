@@ -12,7 +12,7 @@ public class Company {
 
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Long Id;
 
     @Column(name = "title")
     private  String Title;
@@ -40,7 +40,7 @@ public class Company {
     public Company() {
     }
 
-    public Company(int id, String title, String logo, String description) {
+    public Company(Long id, String title, String logo, String description) {
         Id = id;
         Title = title;
         Logo = logo;
@@ -55,7 +55,7 @@ public class Company {
         Licence = licence;
     }
 
-    public Company(int id, String title, User admin, String logo, String description, com.societe2icom.crmbackend.Entities.Licence licence) {
+    public Company(Long id, String title, User admin, String logo, String description, com.societe2icom.crmbackend.Entities.Licence licence) {
         Id = id;
         Title = title;
         Admin = admin;
@@ -64,7 +64,7 @@ public class Company {
         Licence = licence;
     }
 
-    public Company(int id, String title, User admin, List<User> employees, String logo, String description, com.societe2icom.crmbackend.Entities.Licence licence, List<Payment> payments) {
+    public Company(Long id, String title, User admin, List<User> employees, String logo, String description, com.societe2icom.crmbackend.Entities.Licence licence, List<Payment> payments) {
         Id = id;
         Title = title;
         Admin = admin;
@@ -75,11 +75,11 @@ public class Company {
         Payments = payments;
     }
 
-    public int getId() {
+    public Long getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         Id = id;
     }
 

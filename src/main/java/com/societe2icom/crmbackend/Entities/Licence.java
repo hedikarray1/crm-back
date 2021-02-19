@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Licence {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Long Id;
 
     @Column(name = "licence_key")
     private String Key;
@@ -21,7 +21,7 @@ public class Licence {
     @Column(name = "licence_creation_date")
     private Date CreationDate;
 
-    public Licence(int id, String key, Date ExpirationDate, Date creationDate) {
+    public Licence(Long id, String key, Date ExpirationDate, Date creationDate) {
         Id = id;
         Key = key;
         this.ExpirationDate = ExpirationDate;
@@ -37,11 +37,11 @@ public class Licence {
     public Licence() {
     }
 
-    public int getId() {
+    public Long getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         Id = id;
     }
 

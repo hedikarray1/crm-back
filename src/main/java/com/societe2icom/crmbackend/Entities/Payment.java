@@ -10,7 +10,7 @@ public class Payment {
 
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Long Id;
 
     @Column(name = "date")
     private Date Date;
@@ -47,7 +47,7 @@ public class Payment {
         this.company = company;
     }
 
-    public Payment(int id, java.util.Date date, String currency, float amount, String paymentMethod, Company company) {
+    public Payment(Long id, java.util.Date date, String currency, float amount, String paymentMethod, Company company) {
         Id = id;
         Date = date;
         Currency = currency;
@@ -56,11 +56,11 @@ public class Payment {
         this.company = company;
     }
 
-    public int getId() {
+    public Long getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         Id = id;
     }
 

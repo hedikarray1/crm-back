@@ -21,20 +21,42 @@ public class Licence {
     @Column(name = "licence_creation_date")
     private Date CreationDate;
 
-    public Licence(Long id, String key, Date ExpirationDate, Date creationDate) {
-        Id = id;
-        Key = key;
-        this.ExpirationDate = ExpirationDate;
-        CreationDate = creationDate;
-    }
 
-    public Licence(String key, Date ExpirationDate, Date creationDate) {
-        Key = key;
-        this.ExpirationDate = ExpirationDate;
-        CreationDate = creationDate;
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "company",referencedColumnName = "id")
+    private Company Company;
+
 
     public Licence() {
+    }
+
+    public Licence(String key, Date expirationDate, Date creationDate) {
+        Key = key;
+        ExpirationDate = expirationDate;
+        CreationDate = creationDate;
+    }
+
+    public Licence(String key, Date expirationDate, Date creationDate, com.societe2icom.crmbackend.Entities.Company company) {
+        Key = key;
+        ExpirationDate = expirationDate;
+        CreationDate = creationDate;
+        Company = company;
+    }
+
+    public Licence(Long id, String key, Date expirationDate, Date creationDate, com.societe2icom.crmbackend.Entities.Company company) {
+        Id = id;
+        Key = key;
+        ExpirationDate = expirationDate;
+        CreationDate = creationDate;
+        Company = company;
+    }
+
+    public com.societe2icom.crmbackend.Entities.Company getCompany() {
+        return Company;
+    }
+
+    public void setCompany(com.societe2icom.crmbackend.Entities.Company company) {
+        Company = company;
     }
 
     public Long getId() {
@@ -76,19 +98,21 @@ public class Licence {
                 ", Key='" + Key + '\'' +
                 ", ExpirationDate=" + ExpirationDate +
                 ", CreationDate=" + CreationDate +
+                ", Company=" + Company +
                 '}';
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Licence licence = (Licence) o;
-        return Id == licence.Id && Objects.equals(Key, licence.Key) && Objects.equals(ExpirationDate, licence.ExpirationDate) && Objects.equals(CreationDate, licence.CreationDate);
+    public int hashCode() {
+        return super.hashCode();
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(Id, Key, ExpirationDate, CreationDate);
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
+
+
+
+
 }

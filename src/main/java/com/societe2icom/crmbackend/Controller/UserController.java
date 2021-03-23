@@ -1,6 +1,9 @@
 package com.societe2icom.crmbackend.Controller;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.societe2icom.crmbackend.Configuration.FileUploadUtil;
 import com.societe2icom.crmbackend.Configuration.UserDetailsServiceImpl;
 import com.societe2icom.crmbackend.Entities.User;
 import com.societe2icom.crmbackend.Repository.UserRepository;
@@ -12,9 +15,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.PersistenceException;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,7 +62,19 @@ public class UserController {
     }
 
     @PostMapping("create")
-    public ResponseEntity createUser(@RequestBody User user) {
+    public ResponseEntity createUser(@RequestParam("user")  String user1,@RequestParam("image") MultipartFile multipartFile) throws IOException {
+        Date date=new Date();
+        User user=new User();
+        ObjectMapper objectMapper=new ObjectMapper();
+        user=objectMapper.readValue(user1,User.class);
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        System.out.println(user);
+        String extension=fileName.substring(fileName.lastIndexOf(".") );
+
+        String uploadDir = "public/user_pictures" ;
+user.setPicture(String.valueOf(date.getTime())+extension);
+ FileUploadUtil.saveFile(uploadDir, String.valueOf(date.getTime())+extension, multipartFile);
+
         String encodedPassword = passwordEncoder().encode(user.getPassword());
         user.setPassword(encodedPassword);
         try {

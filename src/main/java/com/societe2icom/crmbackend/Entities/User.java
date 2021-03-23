@@ -40,9 +40,6 @@ public class User {
     @Column(name = "token")
     private String Token;
 
-    @ManyToOne
-    @JoinColumn(name="company")
-    private Company company;
 
 
     public User(){
@@ -76,10 +73,10 @@ public class User {
         Role = role;
         Picture = picture;
         Token = token;
-        this.company = company;
+
     }
 
-    public User(Long id, String firstname, String lastname, String email, String password, Date birthdate, String phone, String role, String picture, String token, Company company) {
+    public User(Long id, String firstname, String lastname, String email, String password, Date birthdate, String phone, String role, String picture, String token) {
         Id = id;
         Firstname = firstname;
         Lastname = lastname;
@@ -90,15 +87,6 @@ public class User {
         Role = role;
         Picture = picture;
         Token = token;
-        this.company = company;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
     }
 
     public Long getId() {

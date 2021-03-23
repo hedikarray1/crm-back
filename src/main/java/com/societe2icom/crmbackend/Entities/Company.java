@@ -17,22 +17,28 @@ public class Company {
     @Column(name = "title")
     private  String Title;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "admin", referencedColumnName = "id")
-    private User Admin;
 
-    @OneToMany(cascade =CascadeType.ALL ,mappedBy = "company")
-    private List<User> Employees;
+
+    @OneToMany(cascade =CascadeType.ALL ,mappedBy = "Company")
+    private List<Employee> Employees;
 
     @Column(name = "logo")
     private String Logo;
 
+    @Column(name = "cover")
+    private String Cover;
+
     @Column(name="description")
     private String Description;
+
+    @Column(name="type")
+    private String Type;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "licence",referencedColumnName = "id")
     private Licence Licence;
+
+
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "company")
     private List<Payment> Payments;
@@ -40,37 +46,25 @@ public class Company {
     public Company() {
     }
 
-    public Company(Long id, String title, String logo, String description) {
+    public Company(Long id, String title, List<Employee> employees, String logo, String cover, String description, String type, com.societe2icom.crmbackend.Entities.Licence licence, List<Payment> payments) {
         Id = id;
         Title = title;
-        Logo = logo;
-        Description = description;
-    }
-
-    public Company(String title, User admin, String logo, String description, com.societe2icom.crmbackend.Entities.Licence licence) {
-        Title = title;
-        Admin = admin;
-        Logo = logo;
-        Description = description;
-        Licence = licence;
-    }
-
-    public Company(Long id, String title, User admin, String logo, String description, com.societe2icom.crmbackend.Entities.Licence licence) {
-        Id = id;
-        Title = title;
-        Admin = admin;
-        Logo = logo;
-        Description = description;
-        Licence = licence;
-    }
-
-    public Company(Long id, String title, User admin, List<User> employees, String logo, String description, com.societe2icom.crmbackend.Entities.Licence licence, List<Payment> payments) {
-        Id = id;
-        Title = title;
-        Admin = admin;
         Employees = employees;
         Logo = logo;
+        Cover = cover;
         Description = description;
+        Type = type;
+        Licence = licence;
+        Payments = payments;
+    }
+
+    public Company(String title, List<Employee> employees, String logo, String cover, String description, String type, com.societe2icom.crmbackend.Entities.Licence licence, List<Payment> payments) {
+        Title = title;
+        Employees = employees;
+        Logo = logo;
+        Cover = cover;
+        Description = description;
+        Type = type;
         Licence = licence;
         Payments = payments;
     }
@@ -91,20 +85,28 @@ public class Company {
         Title = title;
     }
 
-    public User getAdmin() {
-        return Admin;
-    }
-
-    public void setAdmin(User admin) {
-        Admin = admin;
-    }
-
-    public List<User> getEmployees() {
+    public List<Employee> getEmployees() {
         return Employees;
     }
 
-    public void setEmployees(List<User> employees) {
+    public void setEmployees(List<Employee> employees) {
         Employees = employees;
+    }
+
+    public String getCover() {
+        return Cover;
+    }
+
+    public void setCover(String cover) {
+        Cover = cover;
+    }
+
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
     }
 
     public String getLogo() {
@@ -139,30 +141,5 @@ public class Company {
         Payments = payments;
     }
 
-    @Override
-    public String toString() {
-        return "Company{" +
-                "Id=" + Id +
-                ", Title='" + Title + '\'' +
-                ", Admin=" + Admin +
-                ", Employees=" + Employees +
-                ", Logo='" + Logo + '\'' +
-                ", Description='" + Description + '\'' +
-                ", Licence=" + Licence +
-                ", Payments=" + Payments +
-                '}';
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Company company = (Company) o;
-        return Id == company.Id && Objects.equals(Title, company.Title) && Objects.equals(Admin, company.Admin) && Objects.equals(Employees, company.Employees) && Objects.equals(Logo, company.Logo) && Objects.equals(Description, company.Description) && Objects.equals(Licence, company.Licence) && Objects.equals(Payments, company.Payments);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(Id, Title, Admin, Employees, Logo, Description, Licence, Payments);
-    }
 }

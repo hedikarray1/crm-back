@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.PersistenceException;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -127,6 +128,7 @@ public ResponseEntity removeUserAdmin( @PathVariable(name = "id") Long id){
 public  User getUserFromRequest(){
     Object userDetails = SecurityContextHolder.getContext().getAuthentication()
             .getPrincipal();
+
     User requestUser=userRepository.findByEmail(userDetails.toString());
   return requestUser;
 }

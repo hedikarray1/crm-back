@@ -36,7 +36,11 @@ public class CompanyController {
     public ResponseEntity getCompanyById(@PathVariable(name = "id") int id){
         User currentUser= userController.getUserFromRequest();
 
-        if(currentUser!=null &&( currentUser.getCompany().getId()==id ||  currentUser.getRole().equalsIgnoreCase("admin"))){
+        if(currentUser!=null
+                &&
+              //  ( currentUser.getCompany().getId()==id ||
+                        currentUser.getRole().equalsIgnoreCase("admin")
+                ){
             return  ResponseEntity.ok().body(companyRepository.findById((long)id));
         }else{
             return ResponseEntity.badRequest().body("vous devez disposer des priorités admin pour pouvoir visualiser les sociétés");
@@ -48,7 +52,10 @@ public class CompanyController {
     public ResponseEntity RemoveCompanyById(@PathVariable(name = "id") int id){
         User currentUser= userController.getUserFromRequest();
 
-        if(currentUser!=null &&( currentUser.getCompany().getId()==id ||  currentUser.getRole().equalsIgnoreCase("admin"))){
+        if(currentUser!=null &&
+              //  ( currentUser.getCompany().getId()==id ||
+                        currentUser.getRole().equalsIgnoreCase("admin")
+        ){
             companyRepository.deleteById((long)id);
             return  ResponseEntity.ok().body("société supprimée avec succès");
         }else{

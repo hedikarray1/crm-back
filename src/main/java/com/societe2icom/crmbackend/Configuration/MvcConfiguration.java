@@ -9,6 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Configuration
 public class MvcConfiguration implements WebMvcConfigurer {
@@ -33,11 +35,26 @@ public class MvcConfiguration implements WebMvcConfigurer {
                 addResourceHandler(API + "/swagger-ui/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/")
                 .resourceChain(false);
+
+        //for images read from web
+        exposeDirectory("public/user_pictures", registry);
+
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController(API + "/swagger-ui/")
                 .setViewName("forward:" + API + "/swagger-ui/index.html");
+    }
+
+
+
+    private void exposeDirectory(String dirName, ResourceHandlerRegistry registry) {
+        Path uploadDir = Paths.get(dirName);
+        String uploadPath = uploadDir.toFile().getAbsolutePath();
+
+        if (dirName.startsWith("../")) dirName = dirName.replace("../", "");
+
+        registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/"+ uploadPath + "/");
     }
 }

@@ -30,7 +30,7 @@ public class CrmbackendApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-       // userRepository.save(new User("2i com","agence 2i com","digitalmark18@gmail.com","123456",new Date(),"20123456","admin","picture.png","token"));
+     //   userRepository.save(new User("2i com","agence 2i com","digitalmark18@gmail.com","123456",new Date(),"20123456","admin","picture.png","token"));
     }
 
 

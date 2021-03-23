@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.PersistenceException;
+import java.io.Console;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -108,6 +109,7 @@ public ResponseEntity removeUserAdmin( @PathVariable(name = "id") Long id){
 public  User getUserFromRequest(){
     Object userDetails = SecurityContextHolder.getContext().getAuthentication()
             .getPrincipal();
+
     User requestUser=userRepository.findByEmail(userDetails.toString());
   return requestUser;
 }

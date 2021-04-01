@@ -1,6 +1,9 @@
 package com.societe2icom.crmbackend.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.societe2icom.crmbackend.Configuration.Views;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +22,14 @@ public class Company {
 
 
 
-    @OneToMany(cascade =CascadeType.ALL ,mappedBy = "Company")
-    private List<Employee> Employees;
 
     @Column(name = "logo")
+
     private String Logo;
 
     @Column(name = "cover")
+    @JsonView(Views.Public.class)
+
     private String Cover;
 
     @Column(name="description")
@@ -46,10 +50,10 @@ public class Company {
     public Company() {
     }
 
-    public Company(Long id, String title, List<Employee> employees, String logo, String cover, String description, String type, com.societe2icom.crmbackend.Entities.Licence licence, List<Payment> payments) {
+    public Company(Long id, String title, String logo, String cover, String description, String type, com.societe2icom.crmbackend.Entities.Licence licence, List<Payment> payments) {
         Id = id;
         Title = title;
-        Employees = employees;
+
         Logo = logo;
         Cover = cover;
         Description = description;
@@ -58,9 +62,9 @@ public class Company {
         Payments = payments;
     }
 
-    public Company(String title, List<Employee> employees, String logo, String cover, String description, String type, com.societe2icom.crmbackend.Entities.Licence licence, List<Payment> payments) {
+    public Company(String title, String logo, String cover, String description, String type, com.societe2icom.crmbackend.Entities.Licence licence, List<Payment> payments) {
         Title = title;
-        Employees = employees;
+
         Logo = logo;
         Cover = cover;
         Description = description;
@@ -83,14 +87,6 @@ public class Company {
 
     public void setTitle(String title) {
         Title = title;
-    }
-
-    public List<Employee> getEmployees() {
-        return Employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        Employees = employees;
     }
 
     public String getCover() {

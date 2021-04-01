@@ -1,6 +1,8 @@
 package com.societe2icom.crmbackend.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,9 +17,8 @@ public class Employee {
     @JoinColumn(name = "user")
     private User User;
 
-
     @ManyToOne(cascade = CascadeType.ALL )
-    @JoinColumn(name = "company")
+    @JoinColumn(name = "company",referencedColumnName = "id")
     private Company Company;
 
     @Column(name = "role")
